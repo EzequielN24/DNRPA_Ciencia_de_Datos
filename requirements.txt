@@ -1,0 +1,23 @@
+# ==============================================================================
+# Dependencias del Proyecto - Trabajo Integrador Ciencia de Datos (UNSL)
+# Instalar usando: pip install -r requirements.txt
+# ==============================================================================
+
+# Core de Ciencia de Datos y Manipulación
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Aprendizaje Automático y Modelado (Clustering / K-Means)
+scikit-learn>=1.2.0
+
+# Visualización y Reportes Gráficos
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Soporte para Notebooks y Entornos Interactivos
+jupyter>=1.0.0
+notebook>=6.5.0
+ipykernel>=6.20.0
+
+# Utilidades para formatos de archivo (ej. Excel)
+openpyxl>=3.1.0

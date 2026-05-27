@@ -1,0 +1,57 @@
+# ==============================================================================
+# .gitignore - Trabajo Integrador Ciencia de Datos (UNSL)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# DATOS Y RECURSOS PESADOS (¡CRÍTICO PARA LA WEB!)
+# Evita subir archivos masivos que superen los límites de GitHub (100MB) 
+# y saturen el repositorio.
+# ------------------------------------------------------------------------------
+data/raw/
+data/processed/
+*.csv
+*.xlsx
+*.parquet
+*.zip
+*.tar.gz
+
+# Reportes de procesamiento generados dinámicamente
+resumen_procesamiento.txt
+
+# ------------------------------------------------------------------------------
+# CACHÉ Y ARCHIVOS TEMPORALES DE PYTHON
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# ------------------------------------------------------------------------------
+# ENTORNOS VIRTUALES
+# ------------------------------------------------------------------------------
+.venv/
+venv/
+ENV/
+env/
+ActiveState.venv
+
+# ------------------------------------------------------------------------------
+# CONFIGURACIONES DE IDEs Y SO (ENTORNOS LOCALES)
+# ------------------------------------------------------------------------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
