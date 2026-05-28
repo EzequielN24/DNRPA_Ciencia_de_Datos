@@ -75,6 +75,34 @@ def unificar_y_preparar(input_dir, output_path):
         if col in df_consolidado.columns:
             df_consolidado[col] = clean_text_column(df_consolidado[col])
             
+    # Normalización estándar de nombres de provincias para evitar duplicados y colinealidades
+    prov_mapping = {
+        'CIUDAD AUTÓNOMA DE BS.AS.': 'CIUDAD AUTÓNOMA DE BUENOS AIRES',
+        'C.AUTONOMA DE BS.AS': 'CIUDAD AUTÓNOMA DE BUENOS AIRES',
+        'C.AUTÓNOMA DE BS.AS.': 'CIUDAD AUTÓNOMA DE BUENOS AIRES',
+        'C. AUTÓNOMA DE BS. AS.': 'CIUDAD AUTÓNOMA DE BUENOS AIRES',
+        'CABA': 'CIUDAD AUTÓNOMA DE BUENOS AIRES',
+        'CORDOBA': 'CÓRDOBA',
+        'SGO.DEL ESTERO': 'SANTIAGO DEL ESTERO',
+        'SGO. DEL ESTERO': 'SANTIAGO DEL ESTERO',
+        'TUCUMAN': 'TUCUMÁN',
+        'ENTRE RIOS': 'ENTRE RÍOS',
+        'NEUQUEN': 'NEUQUÉN',
+        'RIO NEGRO': 'RÍO NEGRO',
+        'T.DEL FUEGO': 'TIERRA DEL FUEGO',
+        'T. DEL FUEGO': 'TIERRA DEL FUEGO',
+        'T DEL FUEGO': 'TIERRA DEL FUEGO',
+        'SANTA FÉ': 'SANTA FE'
+    }
+    for col in ['registro_seccional_provincia', 'titular_domicilio_provincia']:
+        if col in df_consolidado.columns:
+            df_consolidado[col] = df_consolidado[col].replace(prov_mapping)
+            
+    # Eliminar nulos en registro_seccional_provincia para evitar grupos inválidos
+    if 'registro_seccional_provincia' in df_consolidado.columns:
+        df_consolidado = df_consolidado.dropna(subset=['registro_seccional_provincia'])
+
+            
     # 4. Tratamiento y conversión de fechas (estricto formato AAAA-MM-DD en string para salida)
     date_cols = ['tramite_fecha', 'fecha_inscripcion_inicial']
     for col in date_cols:
