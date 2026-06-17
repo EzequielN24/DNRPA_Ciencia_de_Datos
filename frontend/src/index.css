@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-    /* Paleta de Colores HSL - Temática Gubernamental Premium Inteligente */
-    --bg-main: HSL(222, 47%, 7%);       /* Gris pizarra azulado profundo */
-    --bg-card: HSL(222, 40%, 11%);      /* Azul marino oscuro con transparencia */
-    --bg-header: HSL(222, 45%, 9%);
-    --bg-accent: HSL(195, 100%, 45%);   /* Cian eléctrico */
-    --bg-accent-trans: rgba(0, 180, 216, 0.1);
+    /* Paleta de Colores HSL - Temática Ministerio de Seguridad (Blanco y Celeste Premium) */
+    --bg-main: HSL(205, 35%, 96%);       /* Fondo celeste-grisáceo muy claro y limpio */
+    --bg-card: HSL(0, 0%, 100%);        /* Tarjetas en blanco puro */
+    --bg-header: HSL(205, 60%, 93%);    /* Cabecera celeste premium muy claro */
+    --bg-accent: HSL(205, 75%, 45%);    /* Celeste de la bandera nacional, oscuro para contraste */
+    --bg-accent-trans: rgba(116, 172, 223, 0.15);
     
-    --color-text-main: HSL(210, 40%, 98%);
-    --color-text-muted: HSL(215, 20%, 65%);
-    --color-text-accent: HSL(195, 100%, 50%);
+    --color-text-main: HSL(210, 45%, 15%);  /* Texto azul pizarra muy oscuro y legible */
+    --color-text-muted: HSL(210, 15%, 45%); /* Texto secundario gris slate */
+    --color-text-accent: HSL(205, 75%, 35%); /* Celeste acento oscuro */
     
     /* Semáforos de Alerta e Incidencia */
-    --alert-critical: HSL(355, 84%, 54%); /* Rojo */
-    --alert-moderate: HSL(42, 100%, 50%);  /* Amarillo */
-    --alert-efficient: HSL(174, 62%, 47%); /* Verde agua */
+    --alert-critical: HSL(355, 80%, 45%);  /* Rojo oscuro para contraste */
+    --alert-moderate: HSL(40, 95%, 40%);    /* Amarillo oscuro/Dorado */
+    --alert-efficient: HSL(170, 70%, 35%);  /* Verde oscuro */
     
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
     
     --border-radius: 12px;
     --transition-speed: 0.3s;
-    --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-    --border-glass: 1px solid rgba(255, 255, 255, 0.05);
+    --box-shadow: 0 8px 32px rgba(11, 19, 43, 0.05); /* Sombra muy suave */
+    --border-glass: 1px solid rgba(116, 172, 223, 0.15); /* Borde celeste muy sutil */
 }
 
 * {
@@ -49,7 +49,7 @@ body {
     background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
-    background: HSL(222, 20%, 25%);
+    background: HSL(205, 20%, 80%);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -58,7 +58,7 @@ body {
 
 /* Cabecera Principal - Estilo Ministerio */
 header {
-    background: linear-gradient(180deg, var(--bg-header) 0%, rgba(11, 19, 43, 0.8) 100%);
+    background: var(--bg-card);
     border-bottom: var(--border-glass);
     padding: 1.5rem 2.5rem;
     display: flex;
@@ -80,7 +80,6 @@ header {
     fill: var(--bg-accent);
     width: 42px;
     height: 42px;
-    filter: drop-shadow(0 0 8px var(--bg-accent));
 }
 
 .brand-text h1 {
@@ -123,11 +122,11 @@ nav {
 
 .tab-btn:hover {
     color: var(--color-text-main);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .tab-btn.active {
-    color: var(--color-text-main);
+    color: var(--color-text-accent);
     background: var(--bg-accent-trans);
     box-shadow: inset 0 -2px 0 var(--bg-accent);
 }
@@ -180,8 +179,8 @@ main {
 
 .glass-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 40px rgba(11, 19, 43, 0.08);
+    border-color: rgba(116, 172, 223, 0.3);
 }
 
 /* Tarjetas de Métricas Rápidas (KPIs) */
@@ -309,7 +308,7 @@ th {
     font-weight: 600;
     color: var(--color-text-muted);
     padding: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.5px;
@@ -317,12 +316,12 @@ th {
 
 td {
     padding: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     color: var(--color-text-main);
 }
 
 tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.01);
 }
 
 /* Badges e Indicadores */
@@ -424,7 +423,7 @@ tr:hover td {
 /* Panel de Políticas Públicas por Cluster */
 .policy-card {
     border-left: 4px solid var(--alert-color);
-    background: linear-gradient(90deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0) 100%);
     padding: 1.5rem;
     border-radius: 0 8px 8px 0;
     margin-bottom: 1.5rem;
@@ -460,7 +459,7 @@ tr:hover td {
 /* Barra de Progreso de Prioridad (0-100) */
 .progress-bar-container {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     height: 8px;
     border-radius: 50px;
     overflow: hidden;
@@ -488,10 +487,10 @@ tr:hover td {
 .leaflet-popup-content h3 {
     font-family: var(--font-heading) !important;
     font-weight: 700 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
     padding-bottom: 0.3rem !important;
     margin-bottom: 0.5rem !important;
-    color: #ffffff !important;
+    color: var(--color-text-main) !important;
 }
 
 .leaflet-popup-content p {
@@ -500,9 +499,9 @@ tr:hover td {
     color: var(--color-text-muted) !important;
 }
 
-/* Portada/Inicio Premium */
+/* Portada/Inicio Premium - Ministerio */
 .hero-section {
-    background: linear-gradient(135deg, rgba(11, 19, 43, 0.9) 0%, rgba(28, 37, 65, 0.7) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230b0c10" opacity="0.1"/><circle cx="50" cy="50" r="40" stroke="%231f2833" stroke-width="1" fill="none" opacity="0.1"/></svg>');
+    background: linear-gradient(135deg, HSL(205, 60%, 93%) 0%, HSL(205, 35%, 96%) 100%);
     border: var(--border-glass);
     border-radius: var(--border-radius);
     padding: 4rem 3rem;
@@ -520,7 +519,7 @@ tr:hover td {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--bg-accent) 0%, var(--alert-critical) 50%, var(--alert-efficient) 100%);
+    background: linear-gradient(90deg, var(--bg-accent) 0%, var(--bg-accent) 100%);
 }
 
 .hero-title-badge {
@@ -544,7 +543,7 @@ tr:hover td {
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ffffff 0%, var(--color-text-muted) 100%);
+    background: linear-gradient(90deg, var(--color-text-main) 0%, var(--color-text-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -560,7 +559,7 @@ tr:hover td {
     display: flex;
     justify-content: center;
     gap: 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding-top: 2rem;
     margin-top: 2rem;
     flex-wrap: wrap;
