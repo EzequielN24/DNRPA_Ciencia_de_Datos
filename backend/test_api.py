@@ -13,11 +13,12 @@ except Exception as e:
 client = Client()
 
 endpoints = [
-    '/api/summary/',
-    '/api/provinces/',
-    '/api/provinces/SAN LUIS/',
-    '/api/model-info/',
-    '/api/management-impact/'
+    '/api/resumen/',
+    '/api/provincias/',
+    '/api/provincias/SAN LUIS/',
+    '/api/provincias/TODAS LAS PROVINCIAS/',
+    '/api/modelo/',
+    '/api/impacto-gestion/'
 ]
 
 print("Testing API endpoints using Django client...")
