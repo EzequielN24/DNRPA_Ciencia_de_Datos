@@ -74,14 +74,14 @@ const Portada = () => {
                 </ul>
             </section>
 
-            {/* Sección 3: Justificación del Índice de Prioridad (IPI) */}
+            {/* Sección 3: Justificación del Problema Abordado */}
             <section style={{ padding: '3rem 0', borderBottom: '1px solid rgba(116, 172, 223, 0.2)' }}>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Justificación de la Metodología</h3>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Justificación del Problema Abordado</h3>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>
-                    La evaluación tradicional basada únicamente en tasas porcentuales de recuperación resulta engañosa para la toma de decisiones ministeriales. Si una jurisdicción pequeña registra 10 robos y recupera 5, figura con una tasa de recupero del 50%. De igual modo, una gran urbe con 10.000 robos que recupera 5.000 vehículos figura con la misma tasa del 50%. No obstante, a escala gubernamental, el impacto social, económico y de desprotección asociado a dejar 5.000 vehículos sustraídos en circulación ilegal es inmensamente más crítico que dejar 5.
+                    La importancia de investigar y dar solución al robo automotor radica en que no constituye un delito aislado, sino que actúa como el motor principal de redes delictivas más complejas, como el contrabando y el mercado ilegal de autopartes (desarmaderos). Además, tiene un impacto socioeconómico directo y severo sobre el patrimonio, la tranquilidad y la seguridad física de los ciudadanos en su vida cotidiana.
                 </p>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)' }}>
-                    Para subsanar este sesgo de escala, se definió el <strong>Índice de Prioridad de Intervención (IPI)</strong>, el cual representa el número físico neto de vehículos sustraídos que no fueron recuperados en el período analizado. El IPI es normalizado mediante una transformación logarítmica y estandarización Z-Score para clasificar y mapear las jurisdicciones, guiando la asignación de recursos fiscales y policiales hacia donde el impacto es verdaderamente crítico.
+                    Focalizar el análisis en la tasa de recuperación y en el volumen delictivo a nivel federal está plenamente justificado para evitar la dispersión de esfuerzos policiales y estatales. Comprender los patrones geográficos y temporales permite al Ministerio de Seguridad formular políticas orientadas a las zonas más vulnerables, optimizar los presupuestos operativos de las fuerzas de seguridad y establecer estándares de eficiencia interjurisdiccional para reducir la impunidad del delito.
                 </p>
             </section>
 
@@ -120,9 +120,11 @@ const Portada = () => {
                     </div>
 
                     <div style={{ background: 'var(--bg-card)', borderLeft: '3px solid var(--bg-accent)', padding: '1.5rem', borderRadius: '4px', boxShadow: 'var(--box-shadow)' }}>
-                        <h4 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-main)', fontSize: '1.1rem', marginBottom: '0.8rem' }}>Limitaciones</h4>
-                        <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', textAlign: 'justify', lineHeight: '1.6' }}>
-                            [limitaciones]
+                        <h4 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-main)', fontSize: '1.1rem', marginBottom: '0.8rem' }}>Limitaciones de los Datos</h4>
+                        <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', textAlign: 'justify', lineHeight: '1.6', margin: 0 }}>
+                            • <strong>Solo casos denunciados:</strong> Únicamente se muestran los robos y recuperos informados en el registro automotor. Si un hecho no se denuncia de esta forma, no aparece.<br/><br/>
+                            • <strong>Sin detalles del robo:</strong> La base de datos solo indica que el vehículo fue robado, pero no incluye detalles del hecho (como el horario, si fue con violencia o el barrio exacto).<br/><br/>
+                            • <strong>Falta de escalabilidad:</strong> El tablero no es totalmente escalable ante futuros datos. Como las explicaciones de las tendencias provinciales se redactaron basándose en la información actual, si se añaden más datos en el futuro, estas descripciones se tendrían que volver a modificar manualmente.
                         </p>
                     </div>
                 </div>

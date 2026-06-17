@@ -166,11 +166,11 @@ def generar_modelo_clustering():
         "id": crit_cid,
         "nombre": "NIVEL DE INTERVENCIÓN CRÍTICO",
         "color": "#ef233c",
-        "descripcion": "Jurisdicciones con la menor tasa de recuperación vehicular (tasas suavizadas inferiores al 5.0%). Demandan de forma urgente comités de auditoría de trámites, control de desarmaderos e intervención federal.",
+        "descripcion": "Provincias con la menor tasa de recuperación de vehículos robados (menos del 5%). Requieren medidas urgentes para mejorar los tiempos de registro de trámites e inspeccionar los mercados de repuestos.",
         "politicas_publicas": [
-            "Auditorías sobre tiempos de registro de trámites de recupero en seccionales locales.",
-            "Control intensificado e inteligencia criminal sobre desarmaderos y mercados de autopartes.",
-            "Operativos cerrojo integrados con fuerzas nacionales en accesos interprovinciales."
+            "Revisar y agilizar los tiempos que tardan las oficinas locales en registrar las denuncias y recuperos de vehículos.",
+            "Aumentar las inspecciones y controles sobre desarmaderos y comercios que venden repuestos usados.",
+            "Realizar operativos de control policial conjuntos en las rutas de acceso y límites con otras provincias."
         ],
         "robos_promedio": round(float(df_provs[df_provs['cluster_id'] == crit_cid]['robos'].mean()), 1),
         "recuperos_promedio": round(float(df_provs[df_provs['cluster_id'] == crit_cid]['recuperos'].mean()), 1),
@@ -183,11 +183,11 @@ def generar_modelo_clustering():
         "id": eff_cid,
         "nombre": "NIVEL DE EFICIENCIA EN RECUPERO DESTACADA",
         "color": "#2ec4b6",
-        "descripcion": "Jurisdicciones con una tasa de recuperación sobresaliente (Entre Ríos lidera con 18.91% bruta, 16.92% suavizada). Destacan por su efectividad operativa vial y controles camineros eficientes.",
+        "descripcion": "Provincias con una recuperación de vehículos excelente (lideradas por Entre Ríos con casi 17%). Se destacan por su gran efectividad en operativos y controles sobre las rutas.",
         "politicas_publicas": [
-            "Mantenimiento de controles camineros interprovinciales e interjurisdiccionales viales.",
-            "Digitalización completa de la carga de trámites locales para mantener la trazabilidad.",
-            "Programas preventivos vecinales y alerta temprana a través de aplicaciones gubernamentales."
+            "Mantener y reforzar los puestos de control de tránsito en los accesos clave de la provincia.",
+            "Digitalizar todo el sistema de registro de trámites para evitar pérdidas de información y hacer un mejor seguimiento.",
+            "Fomentar la prevención junto a los vecinos y usar aplicaciones móviles para dar avisos rápidos ante robos."
         ],
         "robos_promedio": round(float(df_provs[df_provs['cluster_id'] == eff_cid]['robos'].mean()), 1),
         "recuperos_promedio": round(float(df_provs[df_provs['cluster_id'] == eff_cid]['recuperos'].mean()), 1),
@@ -200,11 +200,11 @@ def generar_modelo_clustering():
         "id": ctrl_cid,
         "nombre": "NIVEL DE INTERVENCIÓN MODERADO / BAJO",
         "color": "#ffb703",
-        "descripcion": "Jurisdicciones con niveles estables o moderados de recuperación vehicular (tasas suavizadas entre 5.5% y 10.0%). Presentan riesgos bajo control operativo ordinario.",
+        "descripcion": "Provincias con niveles intermedios o estables de recuperación de vehículos (entre 5.5% y 10%). Mantienen la situación bajo control con los operativos de seguridad habituales.",
         "politicas_publicas": [
-            "Descentralización de centros de monitoreo inteligentes en ciudades cabeceras.",
-            "Integración de patrullas municipales con rastreo GPS y software predictivo de patrullaje.",
-            "Sistemas integrados de patentes (cámaras fijas y móviles en patrullas) para detección en tiempo real."
+            "Instalar más cámaras de seguridad y centros de monitoreo en las ciudades más importantes de la provincia.",
+            "Equipar a los patrulleros con GPS y usar programas que ayuden a planificar los recorridos de vigilancia diaria.",
+            "Colocar cámaras lectoras de patentes en las entradas principales y patrulleros para detectar autos robados al instante."
         ],
         "robos_promedio": round(float(df_provs[df_provs['cluster_id'] == ctrl_cid]['robos'].mean()), 1),
         "recuperos_promedio": round(float(df_provs[df_provs['cluster_id'] == ctrl_cid]['recuperos'].mean()), 1),
