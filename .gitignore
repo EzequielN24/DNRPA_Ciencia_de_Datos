@@ -58,6 +58,3 @@ Thumbs.db
 
 
 *.sqlite3
-*.sqlite
-db.sqlite
-db.sqlite3
