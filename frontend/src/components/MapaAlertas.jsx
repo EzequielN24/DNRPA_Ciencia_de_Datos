@@ -105,7 +105,7 @@ const MapaAlertas = () => {
                     <p><strong>Robos Totales:</strong> ${formatearNumero(provinciaItem.robos)}</p>
                     <p><strong>Recuperos:</strong> ${formatearNumero(provinciaItem.recuperos)}</p>
                     <p><strong>Tasa de Recupero:</strong> ${provinciaItem.tasa_recupero.toFixed(2)}%</p>
-                    <p><strong>Tasa de Robo:</strong> ${provinciaItem.tasa_robo.toFixed(2)} (por 100k hab)</p>
+                    <p><strong>Tasa de Robo / Densidad:</strong> ${provinciaItem.tasa_robo.toFixed(2)}</p>
                     <p><strong>Categoría de Intervención:</strong> <span class="badge" style="background:${provinciaItem.cluster_color}20; color:${provinciaItem.cluster_color}; border:1px solid ${provinciaItem.cluster_color}50; font-size:0.7rem; font-weight:bold;">${provinciaItem.cluster_nombre.replace("NIVEL DE ", "")}</span></p>
                     <div style="margin-top: 0.6rem; text-align: center;">
                         <button id="map-btn-${provinciaItem.provincia.replace(/\s+/g, '-')}" class="select-input" style="padding: 0.35rem 0.7rem; font-size:0.75rem; cursor:pointer; background:var(--bg-accent); border:none; color:#ffffff; font-weight:bold; border-radius:4px; width:100%;">Ver Evolución Temporal ➔</button>
@@ -182,8 +182,40 @@ const MapaAlertas = () => {
                 </div>
             </div>
 
-            <div className="glass-card" style={{ padding: '0.8rem', marginBottom: '2rem' }}>
+            <div className="glass-card" style={{ padding: '0.8rem', marginBottom: '2rem', position: 'relative' }}>
                 <div id="map" ref={refContenedorMapa}></div>
+                
+                {/* Leyenda de Niveles de Intervención */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: '2rem',
+                    left: '2rem',
+                    zIndex: 1000,
+                    background: 'var(--bg-card)',
+                    border: 'var(--border-glass)',
+                    borderRadius: '8px',
+                    padding: '1rem',
+                    boxShadow: 'var(--box-shadow)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.6rem',
+                    backdropFilter: 'blur(10px)',
+                    minWidth: '220px'
+                }}>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-main)', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '0.3rem', fontFamily: 'var(--font-heading)' }}>Nivel de Intervención</strong>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem' }}>
+                        <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ef233c', display: 'inline-block' }}></span>
+                        <span style={{ color: 'var(--color-text-main)', fontWeight: 500 }}>Crítico</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem' }}>
+                        <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffb703', display: 'inline-block' }}></span>
+                        <span style={{ color: 'var(--color-text-main)', fontWeight: 500 }}>Moderado / Bajo</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem' }}>
+                        <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#2ec4b6', display: 'inline-block' }}></span>
+                        <span style={{ color: 'var(--color-text-main)', fontWeight: 500 }}>Eficiencia Destacada</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

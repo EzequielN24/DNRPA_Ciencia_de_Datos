@@ -85,10 +85,10 @@ const Dashboard = () => {
                                 <span className="kpi-value">{resumen.tasa_recupero_promedio.toFixed(2)}%</span>
                                 <span className="kpi-trend">Promedio de efectividad nacional</span>
                             </div>
-                            <div className="glass-card kpi-card kpi-info" style={{ margin: 0 }}>
-                                <span className="kpi-title">Tasa de Robo Nacional</span>
+                             <div className="glass-card kpi-card kpi-info" style={{ margin: 0 }}>
+                                <span className="kpi-title">Tasa de Robo Nacional (Densidad)</span>
                                 <span className="kpi-value">{resumen.tasa_robo_nacional?.toFixed(1)}</span>
-                                <span className="kpi-trend">Robos por cada 100k hab. (INDEC)</span>
+                                <span className="kpi-trend">Robos ajustados por densidad poblacional</span>
                             </div>
                         </div>
 
@@ -152,7 +152,7 @@ const Dashboard = () => {
                                 <th>Recuperos</th>
                                 <th>Tasa Recupero Real</th>
                                 <th>Tasa Recupero Suavizada</th>
-                                <th>Tasa de Robo (100k hab)</th>
+                                <th>Tasa de Robo / Densidad</th>
                                 <th>Categoría de Intervención</th>
                             </tr>
                         </thead>

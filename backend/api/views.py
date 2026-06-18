@@ -55,6 +55,9 @@ def listar_provincias(request):
 @api_view(['GET'])
 def obtener_detalle_provincia(request, nombre):
     nombre_mayusculas = nombre.strip().upper()
+    from django.db.models import Count
+    from api.models import RegistroDnrpa
+
     if nombre_mayusculas in ["TODAS", "NACIONAL", "NIVEL NACIONAL", "TODAS LAS PROVINCIAS"]:
         from django.db.models import Sum, Avg
         historial_nacional = (
@@ -84,6 +87,24 @@ def obtener_detalle_provincia(request, nombre):
         anio_promedio = lista_provincias.aggregate(Avg('anio_modelo_promedio'))['anio_modelo_promedio__avg'] or 2009.0
         edad_promedio = lista_provincias.aggregate(Avg('edad_titular_promedio'))['edad_titular_promedio__avg'] or 43.0
         
+        robos_totales_nacional = kpi_nacional.robos_totales if kpi_nacional else 1
+        top_marcas_qs = (
+            RegistroDnrpa.objects
+            .filter(tramite_tipo='DENUNCIA DE ROBO O HURTO / RETENCION INDEBIDA')
+            .values('automotor_marca_descripcion')
+            .annotate(cantidad=Count('id'))
+            .order_by('-cantidad')[:5]
+        )
+        top_marcas_nacionales = []
+        for item in top_marcas_qs:
+            marca_nombre = item['automotor_marca_descripcion'] or "DESCONOCIDA"
+            cant = item['cantidad']
+            pct = float((cant / robos_totales_nacional * 100) if robos_totales_nacional > 0 else 0.0)
+            top_marcas_nacionales.append({
+                "marca": marca_nombre.title(),
+                "porcentaje": round(pct, 2)
+            })
+
         return Response({
             "provincia": "TODAS LAS PROVINCIAS",
             "poblacion": sum(provincia.poblacion for provincia in lista_provincias),
@@ -94,12 +115,13 @@ def obtener_detalle_provincia(request, nombre):
             "tasa_robo": kpi_nacional.tasa_robo_nacional if kpi_nacional else 0.0,
             "anio_modelo_promedio": round(anio_promedio, 1),
             "edad_titular_promedio": round(edad_promedio, 1),
-            "marca_lider_robo": "VOLKSWAGEN",
+            "marca_lider_robo": top_marcas_nacionales[0]['marca'] if top_marcas_nacionales else "VOLKSWAGEN",
             "tasa_robo_log": 6.16,
             "cluster_id": 99,
             "cluster_nombre": "CONSOLIDADO FEDERAL",
             "cluster_color": "#1e3a8a",
-            "historial_temporal": lista_historial
+            "historial_temporal": lista_historial,
+            "top_marcas": top_marcas_nacionales
         })
 
     try:
@@ -121,6 +143,24 @@ def obtener_detalle_provincia(request, nombre):
             "tasa_recupero_smoothed": registro_historial.tasa_recupero_smoothed
         })
         
+    robos_totales_prov = provincia.robos_totales
+    top_marcas_qs = (
+        RegistroDnrpa.objects
+        .filter(registro_seccional_provincia=nombre_mayusculas, tramite_tipo='DENUNCIA DE ROBO O HURTO / RETENCION INDEBIDA')
+        .values('automotor_marca_descripcion')
+        .annotate(cantidad=Count('id'))
+        .order_by('-cantidad')[:5]
+    )
+    top_marcas_prov = []
+    for item in top_marcas_qs:
+        marca_nombre = item['automotor_marca_descripcion'] or "DESCONOCIDA"
+        cant = item['cantidad']
+        pct = float((cant / robos_totales_prov * 100) if robos_totales_prov > 0 else 0.0)
+        top_marcas_prov.append({
+            "marca": marca_nombre.title(),
+            "porcentaje": round(pct, 2)
+        })
+
     return Response({
         "provincia": provincia.nombre,
         "poblacion": provincia.poblacion,
@@ -137,7 +177,8 @@ def obtener_detalle_provincia(request, nombre):
         "cluster_id": provincia.cluster.id,
         "cluster_nombre": provincia.cluster.nombre,
         "cluster_color": provincia.cluster.color,
-        "historial_temporal": lista_historial
+        "historial_temporal": lista_historial,
+        "top_marcas": top_marcas_prov
     })
 
 @api_view(['GET'])

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { AppContext } from '../context/AppContext';
 import { formatearNumero, formatearPeriodo } from '../utils/formateadores';
@@ -123,6 +123,8 @@ const Tendencias = () => {
 
     const refGraficoLineaProv = useRef(null);
     const refInstanciaLineaProv = useRef(null);
+    const [escalaLogaritmica, setEscalaLogaritmica] = useState(false);
+
 
     // Renderizado del gráfico de línea de serie temporal por provincia
     useEffect(() => {
@@ -197,10 +199,10 @@ const Tendencias = () => {
                         ticks: { maxTicksLimit: 12, font: { size: 9 }, color: 'var(--color-text-muted)' }
                     },
                     y: {
-                        type: 'linear',
+                        type: escalaLogaritmica ? 'logarithmic' : 'linear',
                         display: true,
                         position: 'left',
-                        title: { display: true, text: 'Cantidad de Trámites', color: 'var(--color-text-main)', font: { size: 10, weight: 'bold' } },
+                        title: { display: true, text: escalaLogaritmica ? 'Cantidad de Trámites (Log)' : 'Cantidad de Trámites', color: 'var(--color-text-main)', font: { size: 10, weight: 'bold' } },
                         grid: { color: 'rgba(0, 0, 0, 0.05)' },
                         ticks: { font: { size: 9 }, color: 'var(--color-text-muted)' }
                     },
@@ -220,9 +222,11 @@ const Tendencias = () => {
                 refInstanciaLineaProv.current = null;
             }
         };
-    }, [detalleProvSeleccionada]);
+    }, [detalleProvSeleccionada, escalaLogaritmica]);
 
-    const topMarcas = generarTopMarcas(detalleProvSeleccionada);
+    const topMarcas = (detalleProvSeleccionada && detalleProvSeleccionada.top_marcas)
+        ? detalleProvSeleccionada.top_marcas
+        : generarTopMarcas(detalleProvSeleccionada);
     const tendenciaTexto = generarTendencia(detalleProvSeleccionada);
     const añoModeloPromedio = generarAñoModelo(detalleProvSeleccionada);
 
@@ -239,26 +243,51 @@ const Tendencias = () => {
                     <div className="card-title" style={{ marginBottom: 0 }}>
                         Serie Temporal Histórica e Indicadores por Jurisdicción
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                        <label htmlFor="select-prov" style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Seleccionar Provincia:</label>
-                        <select
-                            id="select-prov"
-                            className="select-input"
-                            style={{ minWidth: '250px' }}
-                            value={nombreProvSeleccionada}
-                            onChange={(e) => setNombreProvSeleccionada(e.target.value)}
-                        >
-                            <option value="TODAS LAS PROVINCIAS">TODAS LAS PROVINCIAS (CONSOLIDADO FEDERAL)</option>
-                            {[...provincias].sort((a, b) => a.provincia.localeCompare(b.provincia)).map(prov => (
-                                <option key={prov.provincia} value={prov.provincia}>{prov.provincia}</option>
-                            ))}
-                        </select>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                            <label htmlFor="select-prov" style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Seleccionar Provincia:</label>
+                            <select
+                                id="select-prov"
+                                className="select-input"
+                                style={{ minWidth: '250px' }}
+                                value={nombreProvSeleccionada}
+                                onChange={(e) => setNombreProvSeleccionada(e.target.value)}
+                            >
+                                <option value="TODAS LAS PROVINCIAS">TODAS LAS PROVINCIAS (CONSOLIDADO FEDERAL)</option>
+                                {[...provincias].sort((a, b) => a.provincia.localeCompare(b.provincia)).map(prov => (
+                                    <option key={prov.provincia} value={prov.provincia}>{prov.provincia}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255, 255, 255, 0.05)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: 'var(--border-glass)' }}>
+                            <input
+                                type="checkbox"
+                                id="chk-log"
+                                checked={escalaLogaritmica}
+                                onChange={(e) => setEscalaLogaritmica(e.target.checked)}
+                                style={{ cursor: 'pointer', width: '16px', height: '16px', accentColor: '#74acdf' }}
+                            />
+                            <label htmlFor="chk-log" style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', fontWeight: 600, cursor: 'pointer', userSelect: 'none' }}>
+                                Escala Logarítmica (Y)
+                            </label>
+                        </div>
                     </div>
                 </div>
 
                 <div style={{ position: 'relative', height: '350px', width: '100%' }}>
                     <canvas ref={refGraficoLineaProv}></canvas>
                 </div>
+
+                {nombreProvSeleccionada === "TODAS LAS PROVINCIAS" && (
+                    <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                        <h4 style={{ fontSize: '1rem', color: 'var(--color-text-main)', marginBottom: '0.8rem' }}>Análisis temporal nacional entre robos y recuperos</h4>
+                        <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: '1.6', textAlign: 'justify' }}>
+                            Se observa que existe una relación entre la cantidad de robos y los recuperos de vehículos. En general, cuando aumentan los robos registrados, también tiende a incrementarse la cantidad de vehículos recuperados (correlación de Pearson de 0.56). Sin embargo, este efecto no suele observarse de forma inmediata, ya que los recuperos pueden registrarse semanas después del hecho delictivo debido a los tiempos operativos y administrativos involucrados.
+
+                            Además, se observa que los aumentos repentinos en la cantidad de robos no generan incrementos equivalentes de recuperos dentro del mismo mes, lo que podría indicar que los procesos de búsqueda, identificación y recuperación requieren un período adicional para concretarse.
+                        </p>
+                    </div>
+                )}
             </div>
 
             {/* Diagnóstico y Tendencias Provinciales Dinámicas */}
@@ -287,8 +316,8 @@ const Tendencias = () => {
                                     <strong style={{ color: 'var(--bg-accent)', fontFamily: 'var(--font-heading)' }}>{detalleProvSeleccionada.tasa_recupero.toFixed(2)}%</strong>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <span style={{ color: 'var(--color-text-muted)' }}>Tasa de Robo (100k):</span>
-                                    <strong style={{ fontFamily: 'var(--font-heading)' }}>{detalleProvSeleccionada.tasa_robo.toFixed(1)}</strong>
+                                    <span style={{ color: 'var(--color-text-muted)' }}>Tasa de Robo / Densidad:</span>
+                                    <strong style={{ fontFamily: 'var(--font-heading)' }}>{detalleProvSeleccionada.tasa_robo.toFixed(2)}</strong>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <span style={{ color: 'var(--color-text-muted)' }}>Año Modelo Promedio:</span>
@@ -323,6 +352,11 @@ const Tendencias = () => {
                                     </div>
                                 </div>
                             ))}
+                            <div style={{ marginTop: '0.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: '1.6', textAlign: 'justify' }}>
+                                    Este comportamiento evidencia que ciertas marcas presentan una mayor exposición al robo, posiblemente debido posiblemente a su amplia presencia en el parque automotor nacional, su valor de reventa o la demanda de sus autopartes en el mercado informal.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -47,7 +47,7 @@ const Clustering = () => {
                         callbacks: {
                             label: function (contextoItem) {
                                 const punto = contextoItem.raw;
-                                return `${punto.label} | Tasa Rec: ${punto.x.toFixed(2)}% | Tasa Robo: ${punto.y.toFixed(2)} (por 100k hab)`;
+                                return `${punto.label} | Tasa Rec: ${punto.x.toFixed(2)}% | Tasa Robo: ${punto.y.toFixed(2)} (por densidad)`;
                             }
                         }
                     },
@@ -63,7 +63,7 @@ const Clustering = () => {
                         ticks: { color: 'var(--color-text-muted)' }
                     },
                     y: {
-                        title: { display: true, text: 'Tasa de Robo (por cada 100.000 hab.)', color: 'var(--color-text-main)', font: { weight: 'bold' } },
+                        title: { display: true, text: 'Tasa de Robo (por densidad poblacional)', color: 'var(--color-text-main)', font: { weight: 'bold' } },
                         grid: { color: 'rgba(0, 0, 0, 0.05)' },
                         ticks: { color: 'var(--color-text-muted)' }
                     }
@@ -137,7 +137,7 @@ const Clustering = () => {
                         <h4 style={{ color: 'var(--bg-accent)', marginBottom: '0.3rem', fontSize: '1rem' }}>Variables</h4>
                         <p style={{ fontSize: '0.9rem', color: 'var(--color-text-main)', margin: 0, lineHeight: '1.4' }}>
                             <strong>Variable Principal:</strong> Tasa de Recupero Suavizada (calculada con un método Bayesiano para corregir distorsiones en provincias con pocos registros).<br/>
-                            <strong>Variable de Contexto (Eje Y):</strong> Tasa de robos por cada 100.000 habitantes (no influye en la creación de los grupos, solo sirve para dar contexto visual).
+                            <strong>Variable de Contexto (Eje Y):</strong> Tasa de robos por unidad de densidad poblacional (no influye en la creación de los grupos, solo sirve para dar contexto visual).
                         </p>
                     </div>
 
@@ -165,7 +165,7 @@ const Clustering = () => {
                     <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '0.8rem' }}>
                         <h4 style={{ color: 'var(--bg-accent)', marginBottom: '0.3rem', fontSize: '1rem' }}>Interpretación del gráfico</h4>
                         <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: '1.4' }}>
-                            El gráfico muestra cómo el algoritmo agrupa las provincias en base a su eficiencia. El <strong>eje horizontal (X)</strong> representa la tasa de recuperación de vehículos robados: cuanto más a la derecha está una provincia, mejor es su desempeño. El <strong>eje vertical (Y)</strong> representa la tasa de robos por cada 100.000 habitantes. Como el agrupamiento se realiza únicamente con la tasa de recuperación, se forman tres franjas verticales bien marcadas por sus colores (rojo para nivel crítico, amarillo para nivel moderado y verde para destacado).
+                            El gráfico muestra cómo el algoritmo agrupa las provincias en base a su eficiencia. El <strong>eje horizontal (X)</strong> representa la tasa de recuperación de vehículos robados: cuanto más a la derecha está una provincia, mejor es su desempeño. El <strong>eje vertical (Y)</strong> representa la tasa de robos por unidad de densidad poblacional. Como el agrupamiento se realiza únicamente con la tasa de recuperación, se forman tres franjas verticales bien marcadas por sus colores (rojo para nivel crítico, amarillo para nivel moderado y verde para destacado).
                         </p>
                     </div>
                 </div>

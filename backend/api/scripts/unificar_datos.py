@@ -18,6 +18,48 @@ def clean_text_column(series):
     """Auxiliar para normalizar columnas de texto."""
     return series.astype(str).str.strip().str.upper().replace({'NAN': np.nan, 'NONE': np.nan, '': np.nan})
 
+def normalizar_marcas(series):
+    """Normaliza y unifica la descripción de las marcas de los vehículos."""
+    series_clean = series.astype(str).str.strip().str.upper()
+    # 1. Remover códigos prefijos del formato "-XXX-" o "XXX-"
+    series_clean = series_clean.str.replace(r'^[-|\d\s]+-\s*', '', regex=True)
+    # 2. Remover números sueltos al inicio (ej. "3PEUGEOT" -> "PEUGEOT")
+    series_clean = series_clean.str.replace(r'^\d+\s*', '', regex=True)
+    # 3. Remover códigos y paréntesis al final (ej. "RENAULT (112)")
+    series_clean = series_clean.str.replace(r'\s*\(\d+\)\s*$', '', regex=True)
+    # 4. Remover caracteres no alfanuméricos sobrantes al inicio/fin (ej. ".CHEVROLET" -> "CHEVROLET")
+    series_clean = series_clean.str.replace(r'^[^\w]+|[^\w]+$', '', regex=True)
+    
+    # 5. Mapeos de marcas mal escritas
+    diccionario_correcciones = {
+        r'.*VOLKS.*': 'VOLKSWAGEN',
+        r'.*WOLKS.*': 'VOLKSWAGEN',
+        r'.*VOKL.*': 'VOLKSWAGEN',
+        r'.*VLOK.*': 'VOLKSWAGEN',
+        r'.*CHEVR.*': 'CHEVROLET',
+        r'.*CHEVO.*': 'CHEVROLET',
+        r'.*CHERV.*': 'CHEVROLET',
+        r'.*PEUG.*': 'PEUGEOT',
+        r'.*PEOG.*': 'PEUGEOT',
+        r'.*PEUI.*': 'PEUGEOT',
+        r'.*RENAU.*': 'RENAULT',
+        r'.*REAN.*': 'RENAULT',
+        r'.*MERCED.*': 'MERCEDES BENZ',
+        r'.*MERCE.*': 'MERCEDES BENZ',
+        r'^M\.BENZ$': 'MERCEDES BENZ',
+        r'.*CITRO.*': 'CITROEN',
+    }
+    
+    for patron, reemplazo in diccionario_correcciones.items():
+        series_clean = series_clean.str.replace(patron, reemplazo, regex=True)
+        
+    series_clean = series_clean.str.replace(r'\s+', ' ', regex=True).str.strip()
+    
+    valores_invalidos = ["NAN", "NONE", "NO POSEE", "NO CONSTA", "SIN IDENTIFICACION", "SIN MARCA REGISTRADA", "MARCA INVALIDA", "*", "19"]
+    series_clean = series_clean.replace(valores_invalidos, "DESCONOCIDO")
+    
+    return series_clean
+
 def unificar_y_preparar(input_dir):
     print(f"Buscando archivos CSV en: {input_dir}")
     
@@ -83,6 +125,10 @@ def unificar_y_preparar(input_dir):
         if col in df_consolidado.columns:
             df_consolidado[col] = clean_text_column(df_consolidado[col])
             
+    if 'automotor_marca_descripcion' in df_consolidado.columns:
+        df_consolidado['automotor_marca_descripcion'] = normalizar_marcas(df_consolidado['automotor_marca_descripcion'])
+        print("Marcas de vehículos normalizadas y unificadas.")
+            
     # Unificar nombres de Ciudad Autónoma de Buenos Aires (CABA) y eliminar nulos
     if 'registro_seccional_provincia' in df_consolidado.columns:
         df_consolidado['registro_seccional_provincia'] = df_consolidado['registro_seccional_provincia'].replace({
@@ -115,11 +161,13 @@ def unificar_y_preparar(input_dir):
     # A. Año Modelo del Automotor
     if 'automotor_anio_modelo' in df_consolidado.columns:
         df_consolidado['automotor_anio_modelo'] = pd.to_numeric(df_consolidado['automotor_anio_modelo'], errors='coerce')
-        median_anio_modelo = df_consolidado['automotor_anio_modelo'].median()
-        df_consolidado['automotor_anio_modelo'] = df_consolidado['automotor_anio_modelo'].fillna(median_anio_modelo)
-        outliers_anio_modelo = (df_consolidado['automotor_anio_modelo'] < 1960) | (df_consolidado['automotor_anio_modelo'] > 2027)
-        df_consolidado.loc[outliers_anio_modelo, 'automotor_anio_modelo'] = median_anio_modelo
-        print(f" - Outliers en año modelo tratados: {outliers_anio_modelo.sum()}")
+        registros_antes = len(df_consolidado)
+        df_consolidado = df_consolidado[
+            (df_consolidado['automotor_anio_modelo'] >= 1886) & 
+            (df_consolidado['automotor_anio_modelo'] <= 2026)
+        ]
+        eliminados_anio_modelo = registros_antes - len(df_consolidado)
+        print(f" - Registros eliminados por año modelo fuera del rango [1886, 2026]: {eliminados_anio_modelo}")
         
     # B. Año de Nacimiento del Titular
     if 'titular_anio_nacimiento' in df_consolidado.columns:
@@ -246,7 +294,7 @@ def unificar_y_preparar(input_dir):
             f.write(f"Comunicaciones de Recupero: {recu_count}\n")
             f.write(f"Tasa de Recupero: {tasa_recu:.4f}%\n\n")
             f.write("--- Outliers Tratados ---\n")
-            f.write(f"Año Modelo Corregidos: {outliers_anio_modelo.sum()}\n")
+            f.write(f"Año Modelo Eliminados: {eliminados_anio_modelo}\n")
             f.write(f"Año Nacimiento Corregidos: {outliers_naci_titular.sum()}\n")
         print(f"Resumen de procesamiento guardado en: {txt_report_path}")
     except Exception as e:

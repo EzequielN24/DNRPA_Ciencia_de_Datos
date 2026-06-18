@@ -56,6 +56,34 @@ def generar_modelo_clustering():
         'TIERRA DEL FUEGO': 190641,
         'TUCUMÁN': 1703486
     }
+
+    # Superficie oficial (km2) por provincia
+    superficie_provincias = {
+        'BUENOS AIRES': 307571,
+        'CIUDAD AUTÓNOMA DE BUENOS AIRES': 200,
+        'CATAMARCA': 102602,
+        'CHACO': 99633,
+        'CHUBUT': 224686,
+        'CÓRDOBA': 165321,
+        'CORRIENTES': 88199,
+        'ENTRE RÍOS': 78781,
+        'FORMOSA': 72066,
+        'JUJUY': 53219,
+        'LA PAMPA': 143440,
+        'LA RIOJA': 89680,
+        'MENDOZA': 148827,
+        'MISIONES': 29801,
+        'NEUQUÉN': 94078,
+        'RÍO NEGRO': 203013,
+        'SALTA': 155488,
+        'SAN JUAN': 89651,
+        'SAN LUIS': 76748,
+        'SANTA CRUZ': 243943,
+        'SANTA FE': 133007,
+        'SANTIAGO DEL ESTERO': 136351,
+        'TIERRA DEL FUEGO': 21571,
+        'TUCUMÁN': 22524
+    }
     
     # Obtener la lista completa de períodos ordenados a nivel nacional para la serie temporal
     todos_periodos = sorted(df['tramite_periodo'].dropna().astype(str).unique())
@@ -69,9 +97,13 @@ def generar_modelo_clustering():
         
         # Obtener población de la jurisdicción
         pob = poblacion_provincias.get(prov, 1000000) # fallback
+        sup = superficie_provincias.get(prov, 100000) # fallback
         
-        # Tasa de robo por cada 100.000 habitantes
-        tasa_robo = float((robos / pob * 100000) if pob > 0 else 0.0)
+        # Densidad poblacional
+        densidad = pob / sup if sup > 0 else 0.0
+        
+        # Tasa de robo por unidad de densidad poblacional
+        tasa_robo = float((robos / densidad) if densidad > 0 else 0.0)
         
         # Tasa de recupero real
         tasa_recu = float((recuperos / robos * 100) if robos > 0 else 0.0)
@@ -217,8 +249,10 @@ def generar_modelo_clustering():
     df_provs['cluster_nombre'] = df_provs['cluster_id'].map(lambda cid: cluster_profiles[cid]['nombre'])
     df_provs['cluster_color'] = df_provs['cluster_id'].map(lambda cid: cluster_profiles[cid]['color'])
     
-    # Calcular población nacional total
+    # Calcular población nacional total y superficie nacional total
     pob_nacional_total = sum(poblacion_provincias.values())
+    sup_nacional_total = sum(superficie_provincias.values())
+    densidad_nacional = pob_nacional_total / sup_nacional_total
     
     # ------------------ GUARDAR EN BASE DE DATOS DIRECTAMENTE ------------------
     print("\nGuardando resultados consolidados directamente en la Base de Datos...")
@@ -230,13 +264,13 @@ def generar_modelo_clustering():
             ProvinciaHistorial.objects.all().delete()
             Provincia.objects.all().delete()
             Cluster.objects.all().delete()
-
+   
             # 2. Cargar KPIs Nacionales
             KpiNacional.objects.create(
                 robos_totales=int(df_provs['robos'].sum()),
                 recuperos_totales=int(df_provs['recuperos'].sum()),
                 tasa_recupero_promedio=round(float(df_provs['recuperos'].sum() / df_provs['robos'].sum() * 100), 4),
-                tasa_robo_nacional=round(float(df_provs['robos'].sum() / pob_nacional_total * 100000), 4),
+                tasa_robo_nacional=round(float(df_provs['robos'].sum() / densidad_nacional), 4),
                 max_prioridad_provincia=df_provs.loc[df_provs['prioridad_visual'].idxmax(), 'provincia'],
                 min_prioridad_provincia=df_provs.loc[df_provs['prioridad_visual'].idxmin(), 'provincia']
             )
