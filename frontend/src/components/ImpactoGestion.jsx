@@ -266,7 +266,7 @@ const ImpactoGestion = () => {
 
                     {/* Matriz de impacto provincial */}
                     <div className="glass-card" style={{ width: '100%', marginBottom: '2rem' }}>
-                        <div className="card-title">Matriz de Impacto Provincial y Desempeño Relativo</div>
+                        <div className="card-title">Matriz de Evaluación Provincial</div>
                         <div className="table-wrapper">
                             <table style={{ width: '100%' }}>
                                 <thead>

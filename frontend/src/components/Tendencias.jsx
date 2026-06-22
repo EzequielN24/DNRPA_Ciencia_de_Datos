@@ -138,11 +138,11 @@ const Tendencias = () => {
 
         const historial = detalleProvSeleccionada.historial_temporal;
         const etiquetas = historial.map(h => formatearPeriodo(h.periodo));
-        const datosRobos = escalaLogaritmica 
-            ? historial.map(h => h.robos === 0 ? 1 : h.robos) 
+        const datosRobos = escalaLogaritmica
+            ? historial.map(h => h.robos === 0 ? 1 : h.robos)
             : historial.map(h => h.robos);
-        const datosRecuperos = escalaLogaritmica 
-            ? historial.map(h => h.recuperos === 0 ? 1 : h.recuperos) 
+        const datosRecuperos = escalaLogaritmica
+            ? historial.map(h => h.recuperos === 0 ? 1 : h.recuperos)
             : historial.map(h => h.recuperos);
         const datosTasa = historial.map(h => h.tasa_recupero_smoothed);
 
@@ -199,7 +199,7 @@ const Tendencias = () => {
                         mode: 'index',
                         intersect: false,
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 let label = context.dataset.label || '';
                                 if (label) {
                                     label += ': ';
@@ -208,8 +208,8 @@ const Tendencias = () => {
                                 if (valor !== undefined && valor !== null) {
                                     if (escalaLogaritmica && (context.datasetIndex === 0 || context.datasetIndex === 1) && valor === 1) {
                                         const index = context.dataIndex;
-                                        const realVal = context.datasetIndex === 0 
-                                            ? historial[index].robos 
+                                        const realVal = context.datasetIndex === 0
+                                            ? historial[index].robos
                                             : historial[index].recuperos;
                                         if (realVal === 0) {
                                             valor = 0;
@@ -261,7 +261,9 @@ const Tendencias = () => {
         ? detalleProvSeleccionada.top_marcas
         : generarTopMarcas(detalleProvSeleccionada);
     const tendenciaTexto = generarTendencia(detalleProvSeleccionada);
-    const añoModeloPromedio = generarAñoModelo(detalleProvSeleccionada);
+    const añoModeloPromedio = (detalleProvSeleccionada && detalleProvSeleccionada.anio_modelo_promedio)
+        ? Math.round(detalleProvSeleccionada.anio_modelo_promedio).toString()
+        : generarAñoModelo(detalleProvSeleccionada);
 
     return (
         <div className="section-content active">
@@ -286,7 +288,7 @@ const Tendencias = () => {
                                 value={nombreProvSeleccionada}
                                 onChange={(e) => setNombreProvSeleccionada(e.target.value)}
                             >
-                                <option value="TODAS LAS PROVINCIAS">TODAS LAS PROVINCIAS (CONSOLIDADO FEDERAL)</option>
+                                <option value="TODAS LAS PROVINCIAS">TODAS LAS PROVINCIAS</option>
                                 {[...provincias].sort((a, b) => a.provincia.localeCompare(b.provincia)).map(prov => (
                                     <option key={prov.provincia} value={prov.provincia}>{prov.provincia}</option>
                                 ))}

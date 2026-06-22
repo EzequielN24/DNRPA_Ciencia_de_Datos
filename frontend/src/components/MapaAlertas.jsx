@@ -33,11 +33,11 @@ const COORDENADAS_PROVINCIAS = {
 
 const MapaAlertas = () => {
     const navegar = useNavigate();
-    const { 
-        provincias, 
-        busquedaMapa, 
-        setBusquedaMapa, 
-        filtroClusterMapa, 
+    const {
+        provincias,
+        busquedaMapa,
+        setBusquedaMapa,
+        filtroClusterMapa,
         setFiltroClusterMapa,
         setNombreProvSeleccionada
     } = useContext(AppContext);
@@ -155,21 +155,21 @@ const MapaAlertas = () => {
     return (
         <div className="section-content active">
             <div className="section-header">
-                <h2>Mapa Federal de Alertas de Seguridad</h2>
+                <h2>Mapa Nacional de Alertas de Seguridad</h2>
                 <p>Visualización geográfica interactiva. Los colores representan el nivel de intervención basado en la tasa de recuperación vehicular suavizada (a menor recuperación, mayor prioridad de intervención).</p>
             </div>
 
             <div className="map-controls">
-                <input 
-                    type="text" 
-                    className="search-input" 
-                    placeholder="Buscar provincia..." 
-                    value={busquedaMapa} 
-                    onChange={(e) => setBusquedaMapa(e.target.value)} 
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Buscar provincia..."
+                    value={busquedaMapa}
+                    onChange={(e) => setBusquedaMapa(e.target.value)}
                 />
-                <select 
-                    className="select-input" 
-                    value={filtroClusterMapa} 
+                <select
+                    className="select-input"
+                    value={filtroClusterMapa}
                     onChange={(e) => setFiltroClusterMapa(e.target.value)}
                 >
                     <option value="todos">Mostrar todos los Niveles</option>
@@ -184,7 +184,7 @@ const MapaAlertas = () => {
 
             <div className="glass-card" style={{ padding: '0.8rem', marginBottom: '2rem', position: 'relative' }}>
                 <div id="map" ref={refContenedorMapa}></div>
-                
+
                 {/* Leyenda de Niveles de Intervención */}
                 <div style={{
                     position: 'absolute',

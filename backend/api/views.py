@@ -118,7 +118,7 @@ def obtener_detalle_provincia(request, nombre):
             "marca_lider_robo": top_marcas_nacionales[0]['marca'] if top_marcas_nacionales else "VOLKSWAGEN",
             "tasa_robo_log": 6.16,
             "cluster_id": 99,
-            "cluster_nombre": "CONSOLIDADO FEDERAL",
+            "cluster_nombre": "CONSOLIDADO NACIONAL",
             "cluster_color": "#1e3a8a",
             "historial_temporal": lista_historial,
             "top_marcas": top_marcas_nacionales

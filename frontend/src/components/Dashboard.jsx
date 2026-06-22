@@ -59,8 +59,8 @@ const Dashboard = () => {
     return (
         <div className="section-content active">
             <div className="section-header">
-                <h2>Consola Federal de Monitoreo y Asignación de Recursos</h2>
-                <p>Métricas consolidadas e indicadores prioritarios para la planificación del patrullaje y la seguridad interjurisdiccional.</p>
+                <h2>Panel Nacional de Robo y Recupero Vehicular</h2>
+                <p>Indicadores estratégicos para la asignación de recursos y coordinación de la seguridad nacional.</p>
             </div>
 
             {/* KPIs 2×2 + Gráfico de Dona en la misma fila */}
@@ -83,9 +83,9 @@ const Dashboard = () => {
                             <div className="glass-card kpi-card kpi-warning" style={{ margin: 0 }}>
                                 <span className="kpi-title">Tasa de Recupero Nacional</span>
                                 <span className="kpi-value">{resumen.tasa_recupero_promedio.toFixed(2)}%</span>
-                                <span className="kpi-trend">Promedio de efectividad nacional</span>
+                                <span className="kpi-trend">Promedio de recupero nacional</span>
                             </div>
-                             <div className="glass-card kpi-card kpi-info" style={{ margin: 0 }}>
+                            <div className="glass-card kpi-card kpi-info" style={{ margin: 0 }}>
                                 <span className="kpi-title">Tasa de Robo Nacional (Densidad)</span>
                                 <span className="kpi-value">{resumen.tasa_robo_nacional?.toFixed(1)}</span>
                                 <span className="kpi-trend">Robos ajustados por densidad poblacional</span>
@@ -94,7 +94,7 @@ const Dashboard = () => {
 
                         {/* Gráfico de Dona */}
                         <div>
-                            <div className="card-title" style={{ marginBottom: '1rem' }}>Concentración Geográfica de la Actividad Delictiva</div>
+                            <div className="card-title" style={{ marginBottom: '1rem' }}>Distribución Geográfica del Delito Automotor</div>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                 <div style={{ position: 'relative', height: '220px', width: '100%' }}>
                                     <canvas ref={refGraficoDona}></canvas>
@@ -141,7 +141,7 @@ const Dashboard = () => {
             {/* Ranking Table */}
             <div className="glass-card" style={{ width: '100%', marginBottom: '2rem' }}>
                 <div className="card-title">
-                    Ranking Federal de Alertas de Seguridad por Criticidad
+                    Ranking Nacional de Alertas de Seguridad por Criticidad
                 </div>
                 <div className="table-wrapper">
                     <table style={{ width: '100%' }}>
@@ -171,10 +171,9 @@ const Dashboard = () => {
                                         <td>{provinciaItem.tasa_recupero_smoothed.toFixed(2)}%</td>
                                         <td><strong>{provinciaItem.tasa_robo.toFixed(1)}</strong></td>
                                         <td>
-                                            <span className={`badge ${
-                                                provinciaItem.cluster_nombre === 'NIVEL DE INTERVENCIÓN CRÍTICO' ? 'badge-critical' :
+                                            <span className={`badge ${provinciaItem.cluster_nombre === 'NIVEL DE INTERVENCIÓN CRÍTICO' ? 'badge-critical' :
                                                 provinciaItem.cluster_nombre === 'NIVEL DE EFICIENCIA EN RECUPERO DESTACADA' ? 'badge-efficient' : 'badge-moderate'
-                                            }`}>
+                                                }`}>
                                                 {provinciaItem.cluster_nombre.replace("NIVEL DE ", "")}
                                             </span>
                                         </td>

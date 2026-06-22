@@ -36,18 +36,18 @@ const Portada = () => {
         <div className="section-content active" style={{ maxWidth: '1000px', margin: '0 auto' }}>
             {/* Cabecera Principal / Hero */}
             <div className="hero-section">
-                <div className="hero-title-badge">Consola Estratégica Federal</div>
-                <h2>Tablero de Control de Gestión y Priorización del Delito Automotor</h2>
+                <div className="hero-title-badge">Consola Estratégica Nacional</div>
+                <h2>Sistema de Gestión y Priorización de la Seguridad Automotor</h2>
                 <p className="hero-subtitle">
                     Herramienta de análisis para el Ministerio de Seguridad de la Nación orientada a evaluar la eficiencia en la recuperación vehicular y optimizar la distribución de recursos a nivel nacional.
                 </p>
                 <div style={{ marginTop: '2.5rem' }}>
-                    <button 
-                        className="select-input" 
-                        style={{ background: 'var(--bg-accent)', border: 'none', color: '#ffffff', fontWeight: '800', fontFamily: 'var(--font-heading)', padding: '0.9rem 2.2rem', borderRadius: '6px', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 12px rgba(0, 180, 216, 0.2)' }} 
+                    <button
+                        className="select-input"
+                        style={{ background: 'var(--bg-accent)', border: 'none', color: '#ffffff', fontWeight: '800', fontFamily: 'var(--font-heading)', padding: '0.9rem 2.2rem', borderRadius: '6px', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 12px rgba(0, 180, 216, 0.2)' }}
                         onClick={() => navegar('/dashboard')}
                     >
-                        ACCEDER A LA CONSOLA DE MANDO ➔
+                        ACCEDER AL PANEL DE CONTROL ➔
                     </button>
                 </div>
             </div>
@@ -67,7 +67,7 @@ const Portada = () => {
             <section style={{ padding: '3rem 0', borderBottom: '1px solid rgba(116, 172, 223, 0.2)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Preguntas Principales del Proyecto</h3>
                 <ul style={{ paddingLeft: '1.5rem', fontSize: '1.05rem', lineHeight: '1.8', color: 'var(--color-text-main)' }}>
-                    <li style={{ marginBottom: '0.8rem' }}>¿Cuáles son las jurisdicciones con mayor índice de criticidad y prioridad de intervención a nivel federal?</li>
+                    <li style={{ marginBottom: '0.8rem' }}>¿Cuáles son las jurisdicciones con mayor índice de criticidad y prioridad de intervención a nivel nacional?</li>
                     <li style={{ marginBottom: '0.8rem' }}>¿Existe una concentración geográfica marcada del delito automotor en la República Argentina?</li>
                     <li style={{ marginBottom: '0.8rem' }}>¿Cómo ha evolucionado la tasa de recuperación vehicular a lo largo del tiempo y cómo impacta la transición entre gestiones de gobierno?</li>
                     <li style={{ marginBottom: '0.8rem' }}>¿Qué perfiles de provincias pueden identificarse agrupándolas mediante técnicas de aprendizaje automático (K-Means)?</li>
@@ -81,7 +81,7 @@ const Portada = () => {
                     La importancia de investigar y dar solución al robo automotor radica en que no constituye un delito aislado, sino que actúa como el motor principal de redes delictivas más complejas, como el contrabando y el mercado ilegal de autopartes (desarmaderos). Además, tiene un impacto socioeconómico directo y severo sobre el patrimonio, la tranquilidad y la seguridad física de los ciudadanos en su vida cotidiana.
                 </p>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)' }}>
-                    Focalizar el análisis en la tasa de recuperación y en el volumen delictivo a nivel federal está plenamente justificado para evitar la dispersión de esfuerzos policiales y estatales. Comprender los patrones geográficos y temporales permite al Ministerio de Seguridad formular políticas orientadas a las zonas más vulnerables, optimizar los presupuestos operativos de las fuerzas de seguridad y establecer estándares de eficiencia interjurisdiccional para reducir la impunidad del delito.
+                    Focalizar el análisis en la tasa de recuperación y en el volumen delictivo a nivel nacional está plenamente justificado para evitar la dispersión de esfuerzos policiales y estatales. Comprender los patrones geográficos y temporales permite al Ministerio de Seguridad formular políticas orientadas a las zonas más vulnerables, optimizar los presupuestos operativos de las fuerzas de seguridad y establecer estándares de eficiencia interjurisdiccional para reducir la impunidad del delito.
                 </p>
             </section>
 
@@ -122,8 +122,8 @@ const Portada = () => {
                     <div style={{ background: 'var(--bg-card)', borderLeft: '3px solid var(--bg-accent)', padding: '1.5rem', borderRadius: '4px', boxShadow: 'var(--box-shadow)' }}>
                         <h4 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-main)', fontSize: '1.1rem', marginBottom: '0.8rem' }}>Limitaciones de los Datos</h4>
                         <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', textAlign: 'justify', lineHeight: '1.6', margin: 0 }}>
-                            • <strong>Solo casos denunciados:</strong> Únicamente se muestran los robos y recuperos informados en el registro automotor. Si un hecho no se denuncia de esta forma, no aparece.<br/><br/>
-                            • <strong>Sin detalles del robo:</strong> La base de datos solo indica que el vehículo fue robado, pero no incluye detalles del hecho (como el horario, si fue con violencia o el barrio exacto).<br/><br/>
+                            • <strong>Solo casos denunciados:</strong> Únicamente se muestran los robos y recuperos informados en el registro automotor. Si un hecho no se denuncia de esta forma, no aparece.<br /><br />
+                            • <strong>Sin detalles del robo:</strong> La base de datos solo indica que el vehículo fue robado, pero no incluye detalles del hecho (como el horario, si fue con violencia o el barrio exacto).<br /><br />
                             • <strong>Falta de escalabilidad:</strong> El tablero no es totalmente escalable ante futuros datos. Como las explicaciones de las tendencias provinciales se redactaron basándose en la información actual, si se añaden más datos en el futuro, estas descripciones se tendrían que volver a modificar manualmente.
                         </p>
                     </div>
@@ -132,12 +132,12 @@ const Portada = () => {
 
             {/* Acceso Final */}
             <div style={{ textAlign: 'center', margin: '2rem 0 4rem 0' }}>
-                <button 
-                    className="select-input" 
-                    style={{ background: 'var(--bg-accent)', border: 'none', color: '#ffffff', fontWeight: '800', fontFamily: 'var(--font-heading)', padding: '0.9rem 2.2rem', borderRadius: '6px', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 12px rgba(0, 180, 216, 0.2)' }} 
+                <button
+                    className="select-input"
+                    style={{ background: 'var(--bg-accent)', border: 'none', color: '#ffffff', fontWeight: '800', fontFamily: 'var(--font-heading)', padding: '0.9rem 2.2rem', borderRadius: '6px', cursor: 'pointer', fontSize: '1rem', boxShadow: '0 4px 12px rgba(0, 180, 216, 0.2)' }}
                     onClick={() => navegar('/dashboard')}
                 >
-                    ACCEDER A LA CONSOLA DE MANDO ➔
+                    ACCEDER AL PANEL DE CONTROL ➔
                 </button>
             </div>
 

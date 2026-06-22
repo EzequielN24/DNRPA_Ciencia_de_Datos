@@ -12,8 +12,8 @@ const Header = () => {
         <header>
             <div className="brand">
                 <div className="brand-text">
-                    <h1>SFM-DA</h1>
-                    <p>Sistema Federal de Monitoreo del Delito Automotor</p>
+                    <h1>SNM-DA</h1>
+                    <p>Sistema Nacional de Monitoreo del Delito Automotor</p>
                 </div>
             </div>
             <nav>
@@ -21,7 +21,7 @@ const Header = () => {
                     <BookOpen size={16} /> Portada
                 </NavLink>
                 <NavLink style={estiloNavLink} to="/dashboard" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
-                    <Activity size={16} /> Consola de Mando
+                    <Activity size={16} /> Panel de Control
                 </NavLink>
                 <NavLink style={estiloNavLink} to="/mapa" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
                     <Map size={16} /> Mapa de Alertas

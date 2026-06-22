@@ -5,7 +5,7 @@ const Conclusion = () => {
         <div className="section-content active" style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <div className="section-header" style={{ marginBottom: '2.5rem' }}>
                 <h2>Conclusiones del Proyecto</h2>
-                <p>Síntesis de hallazgos del análisis de robos y recuperos de vehículos (2020-2026), resolución de hipótesis y limitaciones.</p>
+                <p>Síntesis de hallazgos del análisis de robos y recuperos de vehículos (2020-2026), resolución de preguntas y limitaciones.</p>
             </div>
 
             {/* Bloque de Conclusión Oficial (Verbatim del PDF) */}
@@ -40,13 +40,13 @@ const Conclusion = () => {
                             A nivel general, se observa una correlación directa en la evolución temporal: <strong>a medida que crece el volumen de robos, también se incrementa la cantidad absoluta de recuperos</strong>. Esta dinámica puede apreciarse de forma clara en la sección de tendencias históricas, donde la representación en doble eje Y muestra curvas que se mueven en la misma dirección ante variaciones estacionales o de mediano plazo, reflejando que el despliegue operativo policial y judicial de recupero responde proporcionalmente a la demanda delictiva, aunque con tasas de eficiencia porcentual dispares por jurisdicción.
                         </p>
                     </div>
-                    
+
                     <div>
                         <h4 style={{ color: 'var(--bg-accent)', fontSize: '1.1rem', marginBottom: '0.4rem', fontWeight: '600' }}>
                             Perfil de Vehículos Más Afectados
                         </h4>
                         <p style={{ margin: 0, color: 'var(--color-text-muted)' }}>
-                            El delito automotor exhibe una marcada selectividad comercial. Las cinco marcas más robadas son <strong>Volkswagen (16,5%), Fiat (14,2%), Chevrolet (12,8%), Renault (11,5%) y Ford (10,1%)</strong>, concentrando conjuntamente cerca del 65% de la siniestralidad. Asimismo, la antigüedad promedio de las unidades sustraídas ronda los 15 años (modelos correspondientes al año 2011), lo que descarta la hipótesis de que el robo afecte principalmente a vehículos nuevos y sugiere que la motivación principal está ligada a abastecer el mercado ilegal de autopartes y repuestos usados.
+                            El delito automotor exhibe una marcada selectividad comercial. Las cinco marcas más robadas son <strong>Volkswagen (19,8%), Chevrolet (13,63%), Renault (13,5%), Fiat (13,08%) y Peugeot (11,77%)</strong>, concentrando conjuntamente el 71,78% de la siniestralidad. Asimismo, la antigüedad promedio de las unidades sustraídas ronda los 15 años (modelos correspondientes al año 2011), lo que descarta la hipótesis de que el robo afecte principalmente a vehículos nuevos y sugiere que la motivación principal está ligada a abastecer el mercado ilegal de autopartes y repuestos usados.
                         </p>
                     </div>
 
@@ -104,13 +104,13 @@ const Conclusion = () => {
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', color: 'var(--color-text-main)', marginBottom: '1.5rem' }}>
                     Resolución de Preguntas Planteadas en Portada
                 </h3>
-                
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem' }}>
-                    
+
                     {/* Pregunta 1 */}
                     <div className="glass-card" style={{ padding: '1.8rem', borderRadius: '12px', background: '#ffffff', border: 'var(--border-glass)', boxShadow: 'var(--box-shadow)' }}>
                         <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--color-text-main)', marginBottom: '0.6rem', fontWeight: '700' }}>
-                            ¿Cuáles son las jurisdicciones con mayor índice de criticidad y prioridad de intervención a nivel federal?
+                            ¿Cuáles son las jurisdicciones con mayor índice de criticidad y prioridad de intervención a nivel nacional?
                         </h4>
                         <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'var(--color-text-muted)', textAlign: 'justify', margin: 0 }}>
                             Las jurisdicciones identificadas con el mayor índice de criticidad son aquellas pertenecientes al clúster de <strong>Nivel de Intervención Crítico</strong> (16 provincias). Entre ellas destacan Buenos Aires (tasa de recupero acumulada de 2,17%), Córdoba, Santa Fe y Mendoza. Estas provincias no solo presentan las eficiencias más bajas en la recuperación vehicular, sino que también registran el mayor volumen de siniestros, convirtiéndose en el área prioritaria para la distribución de recursos del Ministerio.
