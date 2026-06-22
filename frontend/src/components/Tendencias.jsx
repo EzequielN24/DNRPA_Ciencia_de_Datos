@@ -138,8 +138,12 @@ const Tendencias = () => {
 
         const historial = detalleProvSeleccionada.historial_temporal;
         const etiquetas = historial.map(h => formatearPeriodo(h.periodo));
-        const datosRobos = historial.map(h => h.robos);
-        const datosRecuperos = historial.map(h => h.recuperos);
+        const datosRobos = escalaLogaritmica 
+            ? historial.map(h => h.robos === 0 ? 1 : h.robos) 
+            : historial.map(h => h.robos);
+        const datosRecuperos = escalaLogaritmica 
+            ? historial.map(h => h.recuperos === 0 ? 1 : h.recuperos) 
+            : historial.map(h => h.recuperos);
         const datosTasa = historial.map(h => h.tasa_recupero_smoothed);
 
         const ctx = refGraficoLineaProv.current.getContext('2d');
@@ -191,7 +195,36 @@ const Tendencias = () => {
                         position: 'top',
                         labels: { boxWidth: 12, font: { size: 10 }, color: 'var(--color-text-muted)' }
                     },
-                    tooltip: { mode: 'index', intersect: false }
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                let valor = context.raw;
+                                if (valor !== undefined && valor !== null) {
+                                    if (escalaLogaritmica && (context.datasetIndex === 0 || context.datasetIndex === 1) && valor === 1) {
+                                        const index = context.dataIndex;
+                                        const realVal = context.datasetIndex === 0 
+                                            ? historial[index].robos 
+                                            : historial[index].recuperos;
+                                        if (realVal === 0) {
+                                            valor = 0;
+                                        }
+                                    }
+                                    if (context.datasetIndex === 2) {
+                                        label += valor.toFixed(2) + '%';
+                                    } else {
+                                        label += valor;
+                                    }
+                                }
+                                return label;
+                            }
+                        }
+                    }
                 },
                 scales: {
                     x: {

@@ -278,27 +278,8 @@ def unificar_y_preparar(input_dir):
     print(f"\n¡Proceso finalizado con éxito!")
     print(f"Registros limpios guardados en la tabla RegistroDnrpa: {len(df_consolidado)}")
     
-    # Generar resumen_procesamiento.txt en la raíz del proyecto
-    txt_report_path = os.path.join(proyecto_root, "resumen_procesamiento.txt")
-    robo_count = df_consolidado[df_consolidado['tramite_tipo'] == 'DENUNCIA DE ROBO O HURTO / RETENCION INDEBIDA'].shape[0]
-    recu_count = df_consolidado[df_consolidado['tramite_tipo'] == 'COMUNICACIÓN DE RECUPERO'].shape[0]
-    tasa_recu = (recu_count / robo_count * 100) if robo_count > 0 else 0.0
-    
-    try:
-        with open(txt_report_path, "w", encoding="utf-8") as f:
-            f.write(f"Originales: {total_original}\n")
-            f.write(f"Duplicados eliminados: {duplicados_eliminados}\n")
-            f.write(f"Procesados finales: {len(df_consolidado)}\n\n")
-            f.write("--- Trámites ---\n")
-            f.write(f"Denuncias de Robo: {robo_count}\n")
-            f.write(f"Comunicaciones de Recupero: {recu_count}\n")
-            f.write(f"Tasa de Recupero: {tasa_recu:.4f}%\n\n")
-            f.write("--- Outliers Tratados ---\n")
-            f.write(f"Año Modelo Eliminados: {eliminados_anio_modelo}\n")
-            f.write(f"Año Nacimiento Corregidos: {outliers_naci_titular.sum()}\n")
-        print(f"Resumen de procesamiento guardado en: {txt_report_path}")
-    except Exception as e:
-        print(f"Error al escribir resumen_procesamiento.txt: {e}")
+    # Proceso finalizado
+    pass
 
 if __name__ == "__main__":
     INPUT_DIR = os.path.join(proyecto_root, "data", "original", "dataset-dnrpa-robos-recuperos-autos")

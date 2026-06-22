@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, Activity, Map, TrendingUp, BarChart2 } from 'lucide-react';
+import { BookOpen, Activity, Map, TrendingUp, BarChart2, FileText } from 'lucide-react';
 
 const Header = () => {
 
@@ -34,6 +34,9 @@ const Header = () => {
                 </NavLink>
                 <NavLink style={estiloNavLink} to="/clustering" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
                     <BarChart2 size={16} /> Clustering K-Means
+                </NavLink>
+                <NavLink style={estiloNavLink} to="/conclusion" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+                    <FileText size={16} /> Conclusión
                 </NavLink>
             </nav>
         </header>

@@ -9,6 +9,7 @@ import MapaAlertas from './components/MapaAlertas';
 import Tendencias from './components/Tendencias';
 import ImpactoGestion from './components/ImpactoGestion';
 import Clustering from './components/Clustering';
+import Conclusion from './components/Conclusion';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                                 <Route path="/tendencias" element={<Tendencias />} />
                                 <Route path="/impacto" element={<ImpactoGestion />} />
                                 <Route path="/clustering" element={<Clustering />} />
+                                <Route path="/conclusion" element={<Conclusion />} />
                                 <Route path="*" element={<Navigate to="/portada" replace />} />
                             </Routes>
                         </main>

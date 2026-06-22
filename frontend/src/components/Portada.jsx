@@ -150,7 +150,7 @@ const Portada = () => {
                 </div>
                 <div style={{ fontSize: '0.85rem', lineHeight: '1.6' }}>
                     <h5 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.95rem', color: 'var(--color-text-accent)', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fundamentos de Ciencia de Datos</h5>
-                    <p style={{ color: 'var(--color-text-muted)' }}>Cátedra: Mercedes Barrionuevo, Jorge Arroyuelo</p>
+                    <p style={{ color: 'var(--color-text-muted)' }}>Cátedra: Mercedes Barrionuevo, Jorge Arroyuelo y Cristian Tissera</p>
                     <p style={{ color: 'var(--color-text-muted)' }}>Trabajo Final Integrador (2026)</p>
                 </div>
                 <div style={{ fontSize: '0.85rem', lineHeight: '1.6' }}>
