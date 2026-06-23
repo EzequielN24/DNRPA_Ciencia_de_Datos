@@ -336,7 +336,7 @@ const Tendencias = () => {
                         </div>
 
                         <div style={{ background: 'rgba(116, 172, 223, 0.06)', border: 'var(--border-glass)', borderRadius: '8px', padding: '1.2rem', marginTop: 'auto' }}>
-                            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', color: 'var(--color-text-main)', marginBottom: '1rem', borderBottom: '1px solid rgba(0, 0, 0, 0.1)', paddingBottom: '0.3rem' }}>Indicadores Clave: {detalleProvSeleccionada.provincia}</h4>
+                            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', color: 'var(--color-text-main)', marginBottom: '1rem', borderBottom: '1px solid rgba(0, 0, 0, 0.1)', paddingBottom: '0.3rem' }}>KPI: {detalleProvSeleccionada.provincia}</h4>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', fontSize: '0.9rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <span style={{ color: 'var(--color-text-muted)' }}>Robos Totales:</span>

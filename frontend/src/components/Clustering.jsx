@@ -89,7 +89,7 @@ const Clustering = () => {
         );
     }
 
-    // Diccionarios para simplificar el lenguaje de las descripciones y directrices
+    // Diccionarios para simplificar el lenguaje de las descripciones y pautas
     const descripcionesSimplificadas = {
         "NIVEL DE INTERVENCIÓN CRÍTICO": "Provincias con la menor tasa de recuperación de vehículos robados (menos del 5%). Requieren medidas urgentes para mejorar los tiempos de registro de trámites e inspeccionar los mercados de repuestos.",
         "NIVEL DE EFICIENCIA EN RECUPERO DESTACADA": "Provincias con una recuperación de vehículos excelente (lideradas por Entre Ríos con casi 17%). Se destacan por su gran efectividad en operativos y controles sobre las rutas.",
@@ -171,9 +171,9 @@ const Clustering = () => {
                 </div>
             </div>
 
-            {/* Directrices Estratégicas */}
+            {/* Pautas Estratégicas */}
             <div className="section-header" style={{ marginTop: '3rem', marginBottom: '1.5rem' }}>
-                <h3>Directrices Estratégicas y Recomendaciones de Política Pública</h3>
+                <h3>Pautas Estratégicas y Recomendaciones de Política Pública</h3>
                 <p>Acciones recomendadas de control, vigilancia y tecnología adaptadas a la realidad de cada grupo de provincias.</p>
             </div>
             
@@ -196,7 +196,7 @@ const Clustering = () => {
                             </div>
                             <p style={{ color: 'var(--color-text-main)', fontSize: '1.05rem', fontWeight: 500, marginBottom: '1rem' }}>{desc}</p>
                             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1rem' }}>
-                                <strong style={{ color: 'var(--bg-accent)', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '1px', display: 'block', marginBottom: '0.5rem' }}>Directrices recomendadas:</strong>
+                                <strong style={{ color: 'var(--bg-accent)', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '1px', display: 'block', marginBottom: '0.5rem' }}>Pautas o normativas recomendadas:</strong>
                                 <ul style={{ 'marginLeft': '1rem', 'marginTop': '0.5rem' }}>
                                     {politicas.map((politica, indice) => <li key={indice}>{politica}</li>)}
                                 </ul>

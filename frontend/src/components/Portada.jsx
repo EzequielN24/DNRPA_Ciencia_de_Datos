@@ -56,10 +56,10 @@ const Portada = () => {
             <section style={{ padding: '3rem 0', borderBottom: '1px solid rgba(116, 172, 223, 0.2)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Contexto del Problema Abordado</h3>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)', marginBottom: '1rem' }}>
-                    El parque automotor en Argentina constituye un componente fundamental de la economía y la movilidad cotidiana. Sin embargo, su crecimiento ha estado acompañado por problemáticas vinculadas a la seguridad, siendo el robo de vehículos uno de los fenómenos delictivos más relevantes en las áreas metropolitanas y corredores viales.
+                    El parque automotor en Argentina constituye un componente fundamental de la economía y la movilidad cotidiana. Sin embargo, su crecimiento ha estado acompañado por problemáticas vinculadas a la seguridad, siendo el robo de vehículos uno de los fenómenos más frecuentes del país.
                 </p>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)' }}>
-                    Existen diferencias significativas entre provincias tanto en el volumen delictivo absoluto como en la capacidad operativa de recuperar los vehículos robados. Estas diferencias territoriales y las variaciones temporales dificultan la evaluación sistemática del desempeño de las políticas públicas y la optimización de los presupuestos de prevención interjurisdiccional. Este tablero consolida y analiza de forma objetiva la información histórica para dotar de soporte técnico al Ministerio.
+                    Existen diferencias significativas entre provincias tanto en el volumen de robos como en la capacidad operativa de recuperar los vehículos robados. Estas diferencias territoriales y las variaciones temporales dificultan la evaluación del desempeño de las políticas públicas y la optimización de los presupuestos de prevención. Esta aplicación brinda soporte de análisis objetivo para el Ministerio y sus políticas públicas y de seguridad.
                 </p>
             </section>
 
@@ -70,7 +70,7 @@ const Portada = () => {
                     <li style={{ marginBottom: '0.8rem' }}>¿Cuáles son las jurisdicciones con mayor índice de criticidad y prioridad de intervención a nivel nacional?</li>
                     <li style={{ marginBottom: '0.8rem' }}>¿Existe una concentración geográfica marcada del delito automotor en la República Argentina?</li>
                     <li style={{ marginBottom: '0.8rem' }}>¿Cómo ha evolucionado la tasa de recuperación vehicular a lo largo del tiempo y cómo impacta la transición entre gestiones de gobierno?</li>
-                    <li style={{ marginBottom: '0.8rem' }}>¿Qué perfiles de provincias pueden identificarse agrupándolas mediante técnicas de aprendizaje automático (K-Means)?</li>
+                    <li style={{ marginBottom: '0.8rem' }}>¿Qué perfiles de provincias pueden identificarse agrupándolas según el nivel de criticidad?</li>
                 </ul>
             </section>
 
@@ -78,14 +78,14 @@ const Portada = () => {
             <section style={{ padding: '3rem 0', borderBottom: '1px solid rgba(116, 172, 223, 0.2)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Justificación del Problema Abordado</h3>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>
-                    La importancia de investigar y dar solución al robo automotor radica en que no constituye un delito aislado, sino que actúa como el motor principal de redes delictivas más complejas, como el contrabando y el mercado ilegal de autopartes (desarmaderos). Además, tiene un impacto socioeconómico directo y severo sobre el patrimonio, la tranquilidad y la seguridad física de los ciudadanos en su vida cotidiana.
+                    La importancia de investigar y dar solución al robo automotor radica en que no constituye un delito aislado, sino que existe como base para otros delitos, como el contrabando y el mercado ilegal de autopartes (desarmaderos). Además, tiene un impacto socioeconómico directo sobre el patrimonio, la tranquilidad y la seguridad de los ciudadanos en su vida cotidiana.
                 </p>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)' }}>
-                    Focalizar el análisis en la tasa de recuperación y en el volumen delictivo a nivel nacional está plenamente justificado para evitar la dispersión de esfuerzos policiales y estatales. Comprender los patrones geográficos y temporales permite al Ministerio de Seguridad formular políticas orientadas a las zonas más vulnerables, optimizar los presupuestos operativos de las fuerzas de seguridad y establecer estándares de eficiencia interjurisdiccional para reducir la impunidad del delito.
+                    Centrar el análisis en la tasa de recuperación y en el volumen delictivo a nivel nacional está justificado para evitar la dispersión de esfuerzos policiales y estatales. Comprender los patrones geográficos y temporales permite al Ministerio de Seguridad crear políticas orientadas a las zonas más vulnerables, optimizar los presupuestos operativos de las fuerzas de seguridad y establecer estándares de eficiencia para reducir la impunidad del delito.
                 </p>
             </section>
 
-            {/* Sección 4: Ficha Técnica de Datos y Variables */}
+            {/* Sección 4: Ficha de Datos y Variables */}
             <section style={{ padding: '3rem 0' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-text-main)', marginBottom: '1.2rem' }}>Ficha Técnica del Dataset</h3>
                 <p style={{ fontSize: '1.05rem', textAlign: 'justify', lineHeight: '1.7', color: 'var(--color-text-main)', marginBottom: '1.5rem' }}>
@@ -122,9 +122,8 @@ const Portada = () => {
                     <div style={{ background: 'var(--bg-card)', borderLeft: '3px solid var(--bg-accent)', padding: '1.5rem', borderRadius: '4px', boxShadow: 'var(--box-shadow)' }}>
                         <h4 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-main)', fontSize: '1.1rem', marginBottom: '0.8rem' }}>Limitaciones de los Datos</h4>
                         <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', textAlign: 'justify', lineHeight: '1.6', margin: 0 }}>
-                            • <strong>Solo casos denunciados:</strong> Únicamente se muestran los robos y recuperos informados en el registro automotor. Si un hecho no se denuncia de esta forma, no aparece.<br /><br />
-                            • <strong>Sin detalles del robo:</strong> La base de datos solo indica que el vehículo fue robado, pero no incluye detalles del hecho (como el horario, si fue con violencia o el barrio exacto).<br /><br />
-                            • <strong>Falta de escalabilidad:</strong> El tablero no es totalmente escalable ante futuros datos. Como las explicaciones de las tendencias provinciales se redactaron basándose en la información actual, si se añaden más datos en el futuro, estas descripciones se tendrían que volver a modificar manualmente.
+                            - <strong>Solo casos denunciados:</strong> Únicamente se muestran los robos y recuperos informados en el registro automotor. Si un hecho no se denuncia de esta forma, no aparece.<br /><br />
+                            - <strong>Información limitada:</strong> La base de datos utilizada no incluye detalles específicos del robo, como ubicación exacta, modalidad delictiva, horario o nivel de violencia involucrado. Esto limita la posibilidad de realizar análisis más profundos sobre las circunstancias de los delitos.
                         </p>
                     </div>
                 </div>

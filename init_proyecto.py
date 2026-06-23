@@ -13,7 +13,7 @@ def main():
     # Obtener el directorio del script
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
-    print("=== INICIANDO INICIALIZACIÓN DEL TABLERO FEDERAL ===")
+    print("=== INICIANDO PROYECTO ===")
     
     # 1. Aplicar migraciones de Django para crear la base de datos y sus tablas
     run_cmd("python backend/manage.py migrate", cwd=script_dir)
@@ -24,9 +24,8 @@ def main():
     # 3. Entrenar el modelo K-Means y guardar resultados en base de datos
     run_cmd("python backend/api/scripts/generar_modelo.py", cwd=script_dir)
     
-    print("\n=== ¡INICIALIZACIÓN COMPLETADA CON ÉXITO! ===")
-    print("La base de datos SQLite relacional está completamente cargada y entrenada.")
-    print("Puedes iniciar los servidores locales:")
+    print("\n=== INICIALIZACIÓN COMPLETADA ===")
+    print("Para iniciar la aplicación debemos ejecutar los siguientes comandos:")
     print(" - Backend: python -m pipenv run python backend/manage.py runserver")
     print(" - Frontend: cd frontend && npm start")
 

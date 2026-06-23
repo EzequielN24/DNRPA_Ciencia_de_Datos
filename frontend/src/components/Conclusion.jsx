@@ -140,10 +140,10 @@ const Conclusion = () => {
                     {/* Pregunta 4 */}
                     <div className="glass-card" style={{ padding: '1.8rem', borderRadius: '12px', background: '#ffffff', border: 'var(--border-glass)', boxShadow: 'var(--box-shadow)' }}>
                         <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--color-text-main)', marginBottom: '0.6rem', fontWeight: '700' }}>
-                            ¿Qué perfiles de provincias pueden identificarse agrupándolas mediante técnicas de aprendizaje automático (K-Means)?
+                            ¿Qué perfiles de provincias pueden identificarse agrupándolas según el nivel de criticidad?
                         </h4>
                         <p style={{ fontSize: '1rem', lineHeight: '1.6', color: 'var(--color-text-muted)', textAlign: 'justify', margin: 0 }}>
-                            El algoritmo de clustering identificó 3 perfiles claros basados en la Tasa de Recupero Suavizada:
+                            Se logró identificar 3 perfiles claros basados en la Tasa de Recupero Suavizada:
                             <br />
                             • <strong>Nivel de Intervención Crítico (16 provincias):</strong> Encabezadas por Buenos Aires y las principales provincias del interior, con eficiencias menores al 5%.
                             <br />
