@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useMemo } from 'react';
 import Chart from 'chart.js/auto';
 import { AppContext } from '../context/AppContext';
 import { formatearNumero } from '../utils/formateadores';
@@ -9,23 +9,31 @@ const Dashboard = () => {
     const refGraficoDona = useRef(null);
     const refInstanciaDona = useRef(null);
 
+    // Agrupación y ordenación de datos para el gráfico y la leyenda
+    const { etiquetas, datos, colores } = useMemo(() => {
+        if (provincias.length === 0) {
+            return { etiquetas: [], datos: [], colores: [] };
+        }
+        const provinciasOrdenadas = [...provincias].sort((a, b) => b.robos - a.robos);
+        const primeras5 = provinciasOrdenadas.slice(0, 5);
+        const sumaResto = provinciasOrdenadas.slice(5).reduce((acumulador, prov) => acumulador + prov.robos, 0);
+
+        const labels = [...primeras5.map(p => p.provincia), "OTRAS JURISDICCIONES"];
+        const values = [...primeras5.map(p => p.robos), sumaResto];
+        const colors = ['#ef233c', '#ff5a5f', '#ffb703', '#ffc857', '#48cae4', 'rgba(116, 172, 223, 0.45)'];
+
+        return { etiquetas: labels, datos: values, colores: colors };
+    }, [provincias]);
+
     // Renderizado del gráfico de Dona (Concentración Geográfica)
     useEffect(() => {
-        if (provincias.length === 0 || !refGraficoDona.current) {
+        if (etiquetas.length === 0 || !refGraficoDona.current) {
             return;
         }
 
         if (refInstanciaDona.current) {
             refInstanciaDona.current.destroy();
         }
-
-        const provinciasOrdenadas = [...provincias].sort((a, b) => b.robos - a.robos);
-        const primeras5 = provinciasOrdenadas.slice(0, 5);
-        const sumaResto = provinciasOrdenadas.slice(5).reduce((acumulador, prov) => acumulador + prov.robos, 0);
-
-        const etiquetas = [...primeras5.map(p => p.provincia), "OTRAS JURISDICCIONES"];
-        const datos = [...primeras5.map(p => p.robos), sumaResto];
-        const colores = ['#ef233c', '#ff5a5f', '#ffb703', '#ffc857', '#48cae4', 'rgba(116, 172, 223, 0.25)'];
 
         const ctx = refGraficoDona.current.getContext('2d');
         refInstanciaDona.current = new Chart(ctx, {
@@ -54,7 +62,7 @@ const Dashboard = () => {
                 refInstanciaDona.current = null;
             }
         };
-    }, [provincias]);
+    }, [etiquetas, datos, colores]);
 
     return (
         <div className="section-content active">
@@ -108,17 +116,31 @@ const Dashboard = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {[...provincias].sort((a, b) => b.robos - a.robos).map(prov => {
+                                            {etiquetas.map((etiqueta, index) => {
                                                 const totalRobos = resumen?.robos_totales || 1;
-                                                const pct = (prov.robos / totalRobos) * 100;
+                                                const roboCantidad = datos[index];
+                                                const pct = (roboCantidad / totalRobos) * 100;
+                                                const color = colores[index];
                                                 return (
-                                                    <tr key={prov.provincia}>
-                                                        <td><strong>{prov.provincia}</strong></td>
+                                                    <tr key={etiqueta}>
+                                                        <td>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                                <span style={{
+                                                                    display: 'inline-block',
+                                                                    width: '8px',
+                                                                    height: '8px',
+                                                                    borderRadius: '50%',
+                                                                    backgroundColor: color,
+                                                                    flexShrink: 0
+                                                                }}></span>
+                                                                <strong>{etiqueta}</strong>
+                                                            </div>
+                                                        </td>
                                                         <td style={{ textAlign: 'right' }}>
                                                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.4rem' }}>
                                                                 <span>{pct.toFixed(1)}%</span>
                                                                 <div className="progress-bar-container" style={{ marginTop: 0, width: '30px', height: '4px' }}>
-                                                                    <div className="progress-bar-fill" style={{ width: `${pct}%`, background: prov.cluster_color }}></div>
+                                                                    <div className="progress-bar-fill" style={{ width: `${pct}%`, background: color }}></div>
                                                                 </div>
                                                             </div>
                                                         </td>
